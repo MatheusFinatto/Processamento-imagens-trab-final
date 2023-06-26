@@ -168,18 +168,25 @@ namespace WindowsFormsApp1
 
         private void AtualizarImagemPictureBox(byte[,] imagem)
         {
+            // Cria um novo objeto Bitmap com as dimensões da imagem
             Bitmap imagemProcessada = new Bitmap(imagem.GetLength(0), imagem.GetLength(1));
 
             for (int i = 0; i < imagem.GetLength(0); i++)
             {
                 for (int j = 0; j < imagem.GetLength(1); j++)
                 {
+                    // Obtém a intensidade do pixel na posição (i, j)
                     byte pixelIntensity = imagem[i, j];
+
+                    // Cria uma cor de escala de cinza com base na intensidade
                     Color pixel = Color.FromArgb(pixelIntensity, pixelIntensity, pixelIntensity);
+
+                    // Define a cor do pixel correspondente no objeto Bitmap
                     imagemProcessada.SetPixel(i, j, pixel);
                 }
             }
 
+            // Exibe a imagem processada na pictureBox3
             pictureBox3.Image = imagemProcessada;
         }
 
@@ -196,12 +203,15 @@ namespace WindowsFormsApp1
                 {
                     byte minIntensity = 255;
 
+                    // Percorre a vizinhança 3x3 do pixel (i, j)
                     for (int k = -1; k <= 1; k++)
                     {
                         for (int l = -1; l <= 1; l++)
                         {
+                            // Obtém a intensidade do pixel na vizinhança
                             byte intensity = imagem[i + k, j + l];
 
+                            // Atualiza a intensidade mínima encontrada
                             if (intensity < minIntensity)
                             {
                                 minIntensity = intensity;
@@ -209,6 +219,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
+                    // Define a intensidade mínima como o valor do pixel resultante
                     resultado[i, j] = minIntensity;
                 }
             }
@@ -229,12 +240,15 @@ namespace WindowsFormsApp1
                 {
                     byte maxIntensity = 0;
 
+                    // Percorre a vizinhança 3x3 do pixel (i, j)
                     for (int k = -1; k <= 1; k++)
                     {
                         for (int l = -1; l <= 1; l++)
                         {
+                            // Obtém a intensidade do pixel na vizinhança
                             byte intensity = imagem[i + k, j + l];
 
+                            // Atualiza a intensidade máxima encontrada
                             if (intensity > maxIntensity)
                             {
                                 maxIntensity = intensity;
@@ -242,11 +256,13 @@ namespace WindowsFormsApp1
                         }
                     }
 
+                    // Define a intensidade máxima como o valor do pixel resultante
                     resultado[i, j] = maxIntensity;
                 }
             }
 
             return resultado;
         }
+
     }
 }
