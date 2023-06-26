@@ -151,7 +151,7 @@ namespace WindowsFormsApp1
         private void Abertura_Click(object sender, EventArgs e)
         {
             // Aplica a operação de abertura na imagem img1Gray
-            byte[,] vImg1GrayProcessada = Erosao(Dilatacao(vImg1Gray));
+            byte[,] vImg1GrayProcessada = Dilatacao(Erosao(vImg1Gray));
 
             // Atualiza a imagem exibida na pictureBox
             AtualizarImagemPictureBox(vImg1GrayProcessada);
@@ -160,11 +160,12 @@ namespace WindowsFormsApp1
         private void Fechamento_Click(object sender, EventArgs e)
         {
             // Aplica a operação de fechamento na imagem img1Gray
-            byte[,] vImg1GrayProcessada = Dilatacao(Erosao(vImg1Gray));
+            byte[,] vImg1GrayProcessada = Erosao(Dilatacao(vImg1Gray));
 
             // Atualiza a imagem exibida na pictureBox
             AtualizarImagemPictureBox(vImg1GrayProcessada);
         }
+
 
         private void AtualizarImagemPictureBox(byte[,] imagem)
         {
